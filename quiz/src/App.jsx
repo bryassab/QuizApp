@@ -106,7 +106,10 @@ function App() {
         {stop ? <h1 className="finaltext" >  Gano : {gano}</h1> : (
           <>
             <div className="top">
-              <div className="timer"><Timer /></div>
+              <div className="timer">
+                <Timer
+                  setStop={setStop}
+                  questionNumber={questionNumber} /></div>
               <button className="media" onClick={() => Click()}>50/50</button>
             </div>
             <div className="bottom">
