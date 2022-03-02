@@ -2,13 +2,20 @@ import { useEffect, useState } from "react";
 import "./app.css";
 import Timer from "./components/Timer";
 import Trivia from "./components/Trivia";
+import useSound from "use-sound";
+import Result from "./components/Result";
+import pregunta from "./assets/pregunta.mp3";
 
-function App() {
+
+function App({ question, setPrueba, prueba }) {
+  const [username, setUsername] = useState(null)
   const [questionNumber, setQuestionNumber] = useState(1);
   const [timeOut, setTimeOut] = useState(false);
   const [stop, setStop] = useState(false);
   const [gano, setGano] = useState(" $ 0");
   const [boton, setBoton] = useState("")
+  const [play] = useSound(pregunta);
+
 
   const data = [
     {
@@ -79,14 +86,15 @@ function App() {
       ]
     }
 
+
   ]
 
   const moneyPyramid = [
     { id: 1, amount: "$ 100" },
     { id: 2, amount: "$ 200" },
     { id: 3, amount: "$ 300" },
-    { id: 4, amount: "$ 400" },
-    { id: 5, amount: "$ 500" },
+
+
   ].reverse();
 
   useEffect(() => {
@@ -96,45 +104,62 @@ function App() {
   const Click = () => {
     if (boton === "") {
       setBoton(true);
+      play();
+
     }
 
   }
 
   return (
     <div className="app" >
-      <div className="main">
-        {stop ? <h1 className="finaltext" >  Gano : {gano}</h1> : (
-          <>
-            <div className="top">
-              <div className="timer">
-                <Timer
-                  setStop={setStop}
-                  questionNumber={questionNumber} /></div>
-              <button className="media" onClick={() => Click()}>50/50</button>
-            </div>
-            <div className="bottom">
-              <Trivia data={data}
-                setTimeOut={setTimeOut}
-                questionNumber={questionNumber}
-                setQuestionNumber={setQuestionNumber}
-                setStop={setStop}
-                setBoton={setBoton}
-                boton={boton}
-              />
-            </div>
-          </>
-        )}
-      </div>
-      <div className="pyramid">
-        <ul className="moneyList" >
-          {moneyPyramid.map((m, index) => (
-            <li key={index} className={questionNumber === m.id ? "moneyListItem active" : "moneyListItem"} >
-              <span className="moneyListItemNumber" > {m.id} </span>
-              <span className="moneyListItemAmount" > {m.amount} </span>
-            </li>
-          ))}
-        </ul>
-      </div>
+
+      {username ? (
+        <>
+          <div className="main">
+            {stop ? <h1 className="finaltext" >  Total Acumulado : {gano}</h1> : (
+              <>
+                <div className="top">
+                  <div className="timer">
+                    <Timer
+                      setStop={setStop}
+                      questionNumber={questionNumber} /></div>
+                  <button className="media" onClick={() => Click()}>50/50</button>
+                </div>
+                <div className="bottom">
+                  <Trivia data={data}
+                    setTimeOut={setTimeOut}
+                    questionNumber={questionNumber}
+                    setQuestionNumber={setQuestionNumber}
+                    setStop={setStop}
+                    setBoton={setBoton}
+                    boton={boton}
+                  />
+                </div>
+              </>
+            )}
+          </div>
+          <div className="pyramid">
+
+            <ul className="moneyList" >
+              {moneyPyramid.map((m, index) => (
+
+                <li li key={index} className={questionNumber === m.id ? "moneyListItem active" : "moneyListItem"}  >
+                  <span className="moneyListItemNumber" > {m.id} </span>
+                  <span className="moneyListItemAmount" > {m.amount} </span>
+
+
+                </li>
+
+              ))}
+            </ul>
+
+          </div>
+
+
+        </>
+      ) : <Result setUsername={setUsername} />}
+
+
     </div >
   );
 }

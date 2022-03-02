@@ -1,13 +1,23 @@
 import { useEffect, useState } from "react"
-
-export default function Trivia({ data, setStop, questionNumber, setQuestionNumber, setTimeOut, boton, setBoton }) {
+import useSound from "use-sound";
+import correct from "../assets/correct.mp3";
+import pregunta from "../assets/pregunta.mp3";
+import wrong from "../assets/wrong.mp3";
+import Result from "./Result";
+import App from "../App";
+export default function Trivia({ data, setStop, questionNumber, setQuestionNumber, setUsername, boton, setBoton, gano }) {
 
     const [question, setQuestion] = useState(null);
     const [selectedAnswer, setSelectedAnswer] = useState(null);
     const [className, setClassname] = useState("answer");
     const [random, setRandom] = useState();
+    const [play] = useSound(pregunta);
+    const [answercorrect] = useSound(correct);
+    const [answerwrong] = useSound(wrong);
+
 
     useEffect(() => {
+
         setQuestion(data[questionNumber - 1]);
 
         var randomint = parseInt(Math.random() * (3 - 0) + 0);
@@ -37,12 +47,23 @@ export default function Trivia({ data, setStop, questionNumber, setQuestionNumbe
             setClassname(a.correct ? "answer correct" : "answer wrong"),
 
         );
-        delay(6000, () => {
+        delay(3000, () => {
             if (a.correct) {
-                setQuestionNumber((prev) => prev + 1);
-                setSelectedAnswer(null);
+                answercorrect();
+                delay(3000, () => {
+                    setQuestionNumber((prev) => prev + 1);
+                    setSelectedAnswer(null);
+
+                });
+
             } else {
-                setStop(true);
+                answerwrong();
+                delay(3000, () => {
+                    setStop(true);
+
+                })
+
+
             }
             if (boton) {
                 setBoton(false)
@@ -53,15 +74,18 @@ export default function Trivia({ data, setStop, questionNumber, setQuestionNumbe
 
     return (
         <div className="trivia">
-            <div className="question"> {question?.question} </div>
+
+            <div className="question" > {question?.question} </div>
             <div className="answers" >
                 {question?.answers.map((a, index) => {
+
 
                     if (!boton) {
                         return (
                             <div key={index} className={selectedAnswer === a ? className : "answer"}
                                 onClick={() => handleClick(a)}>
                                 {a.text} </div>
+
                         )
                     }
                     else {
@@ -89,6 +113,12 @@ export default function Trivia({ data, setStop, questionNumber, setQuestionNumbe
 
             </div>
 
+
+
+
+
+
         </div>
+
     )
 }
