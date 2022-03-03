@@ -20,7 +20,7 @@ function App({ question, setPrueba, prueba }) {
   const data = [
     {
       id: 1,
-      question: "cual es la principal acuasa por la cual la gente no recicla? ",
+      question: "¿cual es la principal acuasa por la cual la gente no recicla? ",
       answers: [
         {
           text: "falta de informacion ",
@@ -42,7 +42,7 @@ function App({ question, setPrueba, prueba }) {
     },
     {
       id: 2,
-      question: "cuales son los principales lugares en los cuales la gente no recicla? ",
+      question: "¿cuales son los principales lugares en los cuales la gente no recicla? ",
       answers: [
         {
           text: "Ciudades ",
@@ -64,10 +64,125 @@ function App({ question, setPrueba, prueba }) {
     },
     {
       id: 3,
-      question: "para que se usan las bolsas blancas de basura ? ",
+      question: "¿para que se usan las bolsas blancas de basura ? ",
       answers: [
         {
           text: " residuos aprovechables  ",
+          correct: true,
+        },
+        {
+          text: "residuos cantaminantes ",
+          correct: false,
+        },
+        {
+          text: "residuos organicos ",
+          correct: false,
+        },
+        {
+          text: "ninguna de las anteriores",
+          correct: false,
+        }
+
+      ]
+    },
+    {
+      id: 4,
+      question: "¿Cuál de estas acciones no pertenece a la regla de las 3 erres de la sostenibilidad? ",
+      answers: [
+        {
+          text: " Reducir  ",
+          correct: false,
+        },
+        {
+          text: "Reutilizar ",
+          correct: false,
+        },
+        {
+          text: "Reciclar ",
+          correct: false,
+        },
+        {
+          text: "Reorganizar",
+          correct: true,
+        }
+
+      ]
+    },
+    {
+      id: 5,
+      question: "¿Cuál de estos colores no pertenece a un contenedor de reciclaje?",
+      answers: [
+        {
+          text: " Amarillo  ",
+          correct: false,
+        },
+        {
+          text: "Verde ",
+          correct: false,
+        },
+        {
+          text: "Negro ",
+          correct: true,
+        },
+        {
+          text: "Rojo",
+          correct: false,
+        }
+
+      ]
+    },
+    {
+      id: 6,
+      question: "¿Sabes cuánto tarda, de media, en degradarse una botella de plástico? ",
+      answers: [
+        {
+          text: " 20 años  ",
+          correct: false,
+        },
+        {
+          text: "700 años ",
+          correct: true,
+        },
+        {
+          text: "900 años ",
+          correct: false,
+        },
+        {
+          text: "500 años",
+          correct: false,
+        }
+
+      ]
+    },
+    {
+      id: 7,
+      question: "Cuantas bebidas gasesosas se consumieron en 2021 en los pueblos de colombia si en 2020 fue de 13 billones y su venta se incremento un 13% mas en 2021",
+      answers: [
+        {
+          text: " No se  ",
+          correct: false,
+        },
+        {
+          text: "nadie sabe ",
+          correct: true,
+        },
+        {
+          text: "1690000000000 ",
+          correct: false,
+        },
+        {
+          text: "1800000000000",
+          correct: false,
+        }
+
+      ]
+    },
+    {
+      id: 8,
+      question: "¿para que se que se puede utilizar el PET ? ",
+      answers: [
+        {
+          text: "   ",
           correct: true,
         },
         {
@@ -93,6 +208,12 @@ function App({ question, setPrueba, prueba }) {
     { id: 1, amount: "$ 100" },
     { id: 2, amount: "$ 200" },
     { id: 3, amount: "$ 300" },
+    { id: 4, amount: "$ 400" },
+    { id: 5, amount: "$ 500" },
+    { id: 6, amount: "$ 600" },
+    { id: 7, amount: "$ 700" },
+    { id: 8, amount: "$ 800" },
+
 
 
   ].reverse();
